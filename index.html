@@ -199,9 +199,9 @@
                     <div class="row mt-2">
 
                         <!--     button    Fazer pedido    -->
-                        <div class="col d-flex justify-content-end"> 
+                        <div class="col d-flex justify-content-end">
 
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary" @click="fazerPedido()">
                                 Fazer o Pedido
                             </button>
 
@@ -210,14 +210,38 @@
                     </div>
                 </div> <!-- Fim col md -->
 
-                <div class="col-md-6">
+                <div class="col-md-6" v-if="etapa == 2">
                     <div class="row mt-2">
                         <div class="col">
                             <div class="card">
 
                                 <!-- Titulo Informe seus dados -->
 
+                                <div class="card-header">
+                                    Informe Seus Dados
+                                </div>
+
                                 <!-- card-body Informe seus dados -->
+
+                                <div class="card-body">
+
+                                    <!-- nome -->
+                                    <div class="mb-3">
+
+                                        <label class="form-label"> Nome </label>
+                                        <input type="text" class="form-control" v-model="inputNome">
+
+                                    </div>
+
+                                    <!-- mesa -->
+                                    <div class="mb-3">
+
+                                        <label class="form-label"> Mesa </label>
+                                        <input type="text" class="form-control" v-model="inputMesa">
+
+                                    </div>
+
+                                </div>
 
                             </div> <!--  FIM card -->
                         </div> <!-- col -->
@@ -227,6 +251,12 @@
                         <div class="col d-flex justify-content-between">
 
                             <!-- Voltar para o Lanche  -->
+                            <button type="button" class="btn btn-warning" @click="etapa -=1">
+                                Editar Pedido
+                            </button>
+                            <button type="button" class="btn btn-success" @click="confirmarPedido()">
+                                Fazer Pedido
+                            </button>
 
                         </div>
                     </div>
@@ -269,6 +299,8 @@
                 inputMolhos: [],
                 inputHamburguer: '',
                 etapa: 1,
+                inputNome: '',
+                inputMesa: '',
             },
 
             // propriedades Computadas -- Reativas
@@ -336,7 +368,21 @@
                     } else {
                         alert('Você precisa selecionar no mínimo um pão e um hamburguer')
                     }
-                }
+                },
+
+                confirmarPedido() {
+                    if (this.inputNome && this.inputMesa) {
+
+                        this.etapa = 3
+
+
+
+                    } else {
+
+                        alert('Você precisa informar seu Nome e a Mesa')
+
+                    }
+                },
             },
 
 
